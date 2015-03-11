@@ -16,7 +16,8 @@
 package nl.esciencecenter.bmi;
 
 /**
- * Simple BMI Java binding. Currently only supports double values, and treats 0, 1, 2, and 3 dimensional values as simple 1 dimensional arrays.
+ * Simple BMI Java binding. Currently only supports double values, and treats 0, 1, 2, and 3 dimensional values as simple 1
+ * dimensional arrays.
  *
  * @author Niels Drost
  *
@@ -29,12 +30,14 @@ public interface BMI {
 
     public void update_until(double time) throws BMIModelException;
 
+    public void update_frac(double time_frac) throws BMIModelException;
+
+    public void save_state(double destination_folder) throws BMIModelException;
+
     /**
-     * As "finalize" is reserved in Java, we use finalize_model instead.  
+     * As "finalize" is reserved in Java, we use finalize_model instead.
      */
     public void finalize_model() throws BMIModelException;
-
-    public void run_model() throws BMIModelException;
 
     public String get_component_name() throws BMIModelException;
 
@@ -48,11 +51,19 @@ public interface BMI {
 
     public int get_var_rank(String long_var_name) throws BMIModelException;
 
+    public int get_var_size(String long_var_name) throws BMIModelException;
+
+    public int get_var_nbytes(String long_var_name) throws BMIModelException;
+
     public double get_start_time() throws BMIModelException;
+
+    public double get_current_time() throws BMIModelException;
 
     public double get_end_time() throws BMIModelException;
 
-    public double get_current_time() throws BMIModelException;
+    public double get_time_step() throws BMIModelException;
+
+    public String get_time_units() throws BMIModelException;
 
     public double[] get_double(String long_var_name) throws BMIModelException;
 
@@ -71,4 +82,21 @@ public interface BMI {
     public void set_float_at_indices(String long_var_name, int[] indices, float[] src) throws BMIModelException;
 
     public BMIGridType get_grid_type(String long_var_name) throws BMIModelException;
+
+    public int[] get_grid_shape(String long_var_name) throws BMIModelException;
+
+    public double[] get_grid_spacing(String long_var_name) throws BMIModelException;
+
+    public double[] get_grid_origin(String long_var_name) throws BMIModelException;
+
+    public double[] get_grid_x(String long_var_name) throws BMIModelException;
+
+    public double[] get_grid_y(String long_var_name) throws BMIModelException;
+
+    public double[] get_grid_z(String long_var_name) throws BMIModelException;
+
+    public double[] get_grid_connectivity(String long_var_name) throws BMIModelException;
+
+    public double[] get_grid_offset(String long_var_name) throws BMIModelException;
+
 }
