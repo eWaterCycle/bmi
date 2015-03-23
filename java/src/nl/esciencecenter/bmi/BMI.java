@@ -28,75 +28,75 @@ public interface BMI {
 
     public void update() throws BMIModelException;
 
-    public void update_until(double time) throws BMIModelException;
+    public void updateUntil(double time) throws BMIModelException;
 
-    public void update_frac(double time_frac) throws BMIModelException;
+    public void updateFrac(double timeFrac) throws BMIModelException;
 
-    public void save_state(double destination_folder) throws BMIModelException;
+    public void saveState(double destinationFolder) throws BMIModelException;
 
     /**
-     * As "finalize" is reserved in Java, we use finalize_model instead.
+     * As "finalize" is reserved in Java, we use finalizeModel instead.
      */
-    public void finalize_model() throws BMIModelException;
+    public void finalizeModel() throws BMIModelException;
 
-    public String get_component_name() throws BMIModelException;
+    public String getComponentName() throws BMIModelException;
 
-    public String[] get_input_var_names() throws BMIModelException;
+    public String[] getInputVarNames() throws BMIModelException;
 
-    public String[] get_output_var_names() throws BMIModelException;
+    public String[] getOutputVarNames() throws BMIModelException;
 
-    public String get_var_type(String long_var_name) throws BMIModelException;
+    public String getVarType(String longVarName) throws BMIModelException;
 
-    public String get_var_units(String long_var_name) throws BMIModelException;
+    public String getVarUnits(String longVarName) throws BMIModelException;
 
-    public int get_var_rank(String long_var_name) throws BMIModelException;
+    public int getVarRank(String longVarName) throws BMIModelException;
 
-    public int get_var_size(String long_var_name) throws BMIModelException;
+    public int getVarSize(String longVarName) throws BMIModelException;
 
-    public int get_var_nbytes(String long_var_name) throws BMIModelException;
+    public int getVarNbytes(String longVarName) throws BMIModelException;
 
-    public double get_start_time() throws BMIModelException;
+    public double getStartTime() throws BMIModelException;
 
-    public double get_current_time() throws BMIModelException;
+    public double getCurrentTime() throws BMIModelException;
 
-    public double get_end_time() throws BMIModelException;
+    public double get_endTime() throws BMIModelException;
 
-    public double get_time_step() throws BMIModelException;
+    public double getTimeStep() throws BMIModelException;
 
-    public String get_time_units() throws BMIModelException;
+    public String getTimeUnits() throws BMIModelException;
 
-    public double[] get_double(String long_var_name) throws BMIModelException;
+    public double[] getDouble(String longVarName) throws BMIModelException;
 
-    public double[] get_double_at_indices(String long_var_name, int[] indices) throws BMIModelException;
+    public double[] getDoubleAtIndices(String longVarName, int[] indices) throws BMIModelException;
 
-    public void set_double(String long_var_name, double[] src) throws BMIModelException;
+    public void setDouble(String longVarName, double[] src) throws BMIModelException;
 
-    public void set_double_at_indices(String long_var_name, int[] indices, double[] src) throws BMIModelException;
+    public void setDoubleAtIndices(String longVarName, int[] indices, double[] src) throws BMIModelException;
 
-    public float[] get_float(String long_var_name) throws BMIModelException;
+    public float[] getFloat(String longVarName) throws BMIModelException;
 
-    public float[] get_float_at_indices(String long_var_name, int[] indices) throws BMIModelException;
+    public float[] getFloatAtIndices(String longVarName, int[] indices) throws BMIModelException;
 
-    public void set_float(String long_var_name, float[] src) throws BMIModelException;
+    public void setFloat(String longVarName, float[] src) throws BMIModelException;
 
-    public void set_float_at_indices(String long_var_name, int[] indices, float[] src) throws BMIModelException;
+    public void setFloatAtIndices(String longVarName, int[] indices, float[] src) throws BMIModelException;
 
-    public BMIGridType get_grid_type(String long_var_name) throws BMIModelException;
+    public BMIGridType getGridType(String longVarName) throws BMIModelException;
 
-    public int[] get_grid_shape(String long_var_name) throws BMIModelException;
+    public int[] getGridShape(String longVarName) throws BMIModelException;
 
-    public double[] get_grid_spacing(String long_var_name) throws BMIModelException;
+    public double[] getGridSpacing(String longVarName) throws BMIModelException;
 
-    public double[] get_grid_origin(String long_var_name) throws BMIModelException;
+    public double[] getGridOrigin(String longVarName) throws BMIModelException;
 
-    public double[] get_grid_x(String long_var_name) throws BMIModelException;
+    public double[] getGridX(String longVarName) throws BMIModelException;
 
-    public double[] get_grid_y(String long_var_name) throws BMIModelException;
+    public double[] getGridY(String longVarName) throws BMIModelException;
 
-    public double[] get_grid_z(String long_var_name) throws BMIModelException;
+    public double[] getGridZ(String longVarName) throws BMIModelException;
 
-    public double[] get_grid_connectivity(String long_var_name) throws BMIModelException;
+    public double[] getGridConnectivity(String longVarName) throws BMIModelException;
 
-    public double[] get_grid_offset(String long_var_name) throws BMIModelException;
+    public double[] getGridOffset(String longVarName) throws BMIModelException;
 
 }

@@ -2,3 +2,5 @@
 /tmp_eclipse/
 .*
 !.gitignore
+/java/build
+/java/dist
