@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nl.esciencecenter.bmi;
+package bmi;
 
 /**
  * Simple BMI Java binding. Currently only supports double values, and treats 0, 1, 2, and 3 dimensional values as simple 1
@@ -32,7 +32,7 @@ public interface BMI {
 
     public void updateFrac(double timeFrac) throws BMIModelException;
 
-    public void saveState(double destinationFolder) throws BMIModelException;
+    public void saveState(String destinationFolder) throws BMIModelException;
 
     /**
      * As "finalize" is reserved in Java, we use finalizeModel instead.
@@ -59,7 +59,7 @@ public interface BMI {
 
     public double getCurrentTime() throws BMIModelException;
 
-    public double get_endTime() throws BMIModelException;
+    public double getEndTime() throws BMIModelException;
 
     public double getTimeStep() throws BMIModelException;
 
