@@ -15,18 +15,17 @@
  */
 package bmi.examples;
 
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import bmi.BMI;
+import bmi.EBMI;
 import bmi.BMIGridType;
 import bmi.BMIModelException;
 import bmi.examples.IncrementModel;
@@ -34,7 +33,7 @@ import bmi.examples.IncrementModel;
 public class IncrementModelTest {
 
     //fixture
-    private BMI model;
+    private EBMI model;
 
     @Before
     public void setUp() throws BMIModelException {
@@ -62,6 +61,7 @@ public class IncrementModelTest {
     public void testIncrementModel() throws Exception {
        new IncrementModel();
     }
+    
 
     /**
      * Test method for {@link nl.esciencecenter.bmi.toymodels.IncrementModel#initialize(java.lang.String)}.
@@ -69,10 +69,27 @@ public class IncrementModelTest {
      * @throws Exception
      */
     public void testInitialize() throws Exception {
-        BMI model = new IncrementModel();
+        EBMI model = new IncrementModel();
 
         model.initialize("");
     }
+    
+    @Test
+    public void testInitializeConfig() throws Exception {
+        EBMI model = new IncrementModel();
+
+        model.initializeConfig("");
+    }
+
+    @Test
+    public void testInitializeState() throws Exception {
+        EBMI model = new IncrementModel();
+
+        model.initializeConfig("");
+        
+        model.initializeState();
+    }
+
 
     /**
      * Test method for {@link nl.esciencecenter.bmi.toymodels.IncrementModel#update()}.
@@ -96,7 +113,7 @@ public class IncrementModelTest {
     }
 
     @Test(expected = BMIModelException.class)
-    public void testUpdateAfterEndTimeException() throws Exception {
+    public void testUpdate_AfterEndTime_Exception() throws Exception {
         model.updateUntil(model.getEndTime());
 
         model.update();
@@ -125,12 +142,12 @@ public class IncrementModelTest {
     }
 
     @Test(expected = BMIModelException.class)
-    public void testUpdateUntilAfterEndTimeException() throws Exception {
+    public void testUpdateUntil_AfterEndTime_Exception() throws Exception {
         model.updateUntil(100000.0);
     }
 
     @Test(expected = BMIModelException.class)
-    public void testUpdateUntil_BeforeCurrentTimeException() throws Exception {
+    public void testUpdateUntil_BeforeCurrentTime_Exception() throws Exception {
         model.updateUntil(-100000.0);
 
     }
@@ -196,7 +213,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testGetVarTypeInvalidVariableException() throws Exception {
+    public void testGetVarType_InvalidVariable_Exception() throws Exception {
         model.getVarType("doesNotExistVar");
     }
 
@@ -242,7 +259,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testGetVar_rankInvalidVariableException() throws Exception {
+    public void testGetVarRank_InvalidVariable_Exception() throws Exception {
 
         model.getVarRank("doesNotExistVar");
     }
@@ -332,7 +349,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testGetDoubleInvalidVariableException() throws Exception {
+    public void testGetDouble_InvalidVariable_Exception() throws Exception {
         model.getDouble("doesNotExistVar");
     }
 
@@ -363,7 +380,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testGetDoubleAtIndicesInvalidVariableException() throws Exception {
+    public void testGetDoubleAtIndices_InvalidVariable_Exception() throws Exception {
         int[] indices = new int[] { 4, 5, 6, 7, 8 };
 
         model.getDoubleAtIndices("doesNotExistVar", indices);
@@ -400,7 +417,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testSetDoubleInvalidVariableException() throws Exception {
+    public void testSetDouble_InvalidVariable_Exception() throws Exception {
         double[] data = new double[100];
 
         model.setDouble("doesNotExistVar", data);
@@ -446,7 +463,7 @@ public class IncrementModelTest {
      * {@link nl.esciencecenter.bmi.toymodels.IncrementModel#setDoubleAtIndices(java.lang.String, int[], double[])}.
      */
     @Test(expected = BMIModelException.class)
-    public void testSetDoubleAtIndicesInvalidVariableException() throws Exception {
+    public void testSetDoubleAtIndices_InvalidVariable_Exception() throws Exception {
         int[] indices = new int[] { 4, 5, 6, 7, 8 };
         double[] values = new double[] { 4., 5., 6., 7., 8. };
 
@@ -471,7 +488,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testGetGridTypeInvalidVariableException() throws Exception {
+    public void testGetGridType_InvalidVariable_Exception() throws Exception {
 
         model.getGridType("doesNotExistVar");
     }
@@ -497,7 +514,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testGetGridShapeInvalidVariableException() throws Exception {
+    public void testGetGridShape_InvalidVariable_Exception() throws Exception {
         model.getGridShape("doesNotExistVar");
     }
 
@@ -521,7 +538,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testGetGridSpacingInvalidVariableException() throws Exception {
+    public void testGetGridSpacing_InvalidVariable_Exception() throws Exception {
         model.getGridSpacing("doesNotExistVar");
 
     }
@@ -546,7 +563,7 @@ public class IncrementModelTest {
      * @throws Exception
      */
     @Test(expected = BMIModelException.class)
-    public void testGetGridOriginInvalidVariableException() throws Exception {
+    public void testGetGridOrigin_InvalidVariable_Exception() throws Exception {
         model.getGridOrigin("doesNotExistVar");
 
     }
@@ -705,5 +722,78 @@ public class IncrementModelTest {
     public void testGetGridOffset() throws BMIModelException {
         model.getGridOffset("var1");
     }
+    
+    @Test
+    public void testSetStartTime() throws Exception {
+        EBMI model = new IncrementModel();
+
+        model.initializeConfig("");
+        
+        assertEquals(1.0, model.getStartTime(), 0.0);
+        
+        model.setStartTime(5.0);
+        
+        assertEquals(5.0, model.getStartTime(), 0.0);
+    }
+    
+    @Test(expected = BMIModelException.class)
+    public void testSetStartTime_afterInit_Error() throws Exception {
+        EBMI model = new IncrementModel();
+
+        model.initializeConfig("");
+        model.initializeState();
+        
+        model.setStartTime(5.0);
+    }
+
+    @Test
+    public void testSetEndTime() throws Exception {
+        EBMI model = new IncrementModel();
+
+        model.initializeConfig("");
+        
+        assertEquals(20.0, model.getEndTime(), 0.0);
+        
+        model.setEndTime(10.0);
+        
+        assertEquals(10.0, model.getEndTime(), 0.0);
+    }
+    
+    @Test(expected = BMIModelException.class)
+    public void testSetEndTime_afterInit_Error() throws Exception {
+        EBMI model = new IncrementModel();
+
+        model.initializeConfig("");
+        model.initializeState();
+        
+        model.setEndTime(5.0);
+    }
+    
+    @Test
+    public void testGetAttributeNames() throws Exception {
+        assertArrayEquals("incorrect list of attribute names", new String[] { "author"}, model.getAttributeNames());
+    }
+
+    @Test
+    public void testGetAttributeValue() throws Exception {
+        assertEquals("Rolf Hut", model.getAttributeValue("author"), "wrong value for attribute");
+    }
+    
+    @Test(expected = BMIModelException.class)
+    public void testGetAttributeValue_InvalidAttribte_Exception() throws Exception {
+        model.getAttributeValue("InvalidAttributeName");
+    }
+
+    @Test(expected = BMIModelException.class)
+    public void testSetAttributeValue_Exception() throws Exception {
+        model.setAttributeValue("some.attribute",  "some.value");
+    }
+
+    
+    
+    
+    
+    
+    
 
 }

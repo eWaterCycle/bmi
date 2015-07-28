@@ -15,9 +15,9 @@
  */
 package bmi.examples;
 
-import bmi.BMI;
 import bmi.BMIGridType;
 import bmi.BMIModelException;
+import bmi.EBMI;
 
 /**
  * Model that holds only a single (grid) variable, which increments at every timestep.
@@ -27,12 +27,12 @@ import bmi.BMIModelException;
  * @author Niels Drost
  *
  */
-public class IncrementModel implements BMI {
+public class IncrementModel implements EBMI {
     private double dt;
     private double t;
     private double startTime;
     private double endTime;
-    private DoubleRaster state;
+    private DoubleRaster state = null;
 
     private final int[] shape;
     private final String name = "Example java toy increment Model";
@@ -42,15 +42,26 @@ public class IncrementModel implements BMI {
     }
 
     @Override
-    public void initialize(String file) throws BMIModelException {
+    public void initializeConfig(String configFile) throws BMIModelException {
+        //file not actually used
+
         dt = 1.0;
         startTime = 1.0;
         t = startTime;
         endTime = 20.0;
+    }
 
+    @Override
+    public void initializeState() throws BMIModelException {
+        //initialize state
         state = new DoubleRaster(shape[0], shape[1]);
         state.setScalar(startTime);
+    }
 
+    @Override
+    public void initialize(String file) throws BMIModelException {
+        initializeConfig(file);
+        initializeState();
     }
 
     @Override
@@ -285,12 +296,49 @@ public class IncrementModel implements BMI {
     }
 
     @Override
-    public double[] getGridConnectivity(String longVarName) throws BMIModelException {
+    public int[] getGridConnectivity(String longVarName) throws BMIModelException {
         throw new BMIModelException("model only supports raster variables");
     }
 
     @Override
-    public double[] getGridOffset(String longVarName) throws BMIModelException {
+    public int[] getGridOffset(String longVarName) throws BMIModelException {
         throw new BMIModelException("model only supports raster variables");
+    }
+
+    @Override
+    public void setStartTime(double startTime) throws BMIModelException {
+        if (this.state != null) {
+            throw new BMIModelException("cannot set start time after model has been initialized");
+        }
+
+        this.startTime = startTime;
+    }
+
+    @Override
+    public void setEndTime(double endTime) throws BMIModelException {
+        if (this.state != null) {
+            throw new BMIModelException("cannot set start time after model has been initialized");
+        }
+
+        this.endTime = endTime;
+    }
+
+    @Override
+    public String[] getAttributeNames() throws BMIModelException {
+        return new String[] { "author" };
+    }
+
+    @Override
+    public String getAttributeValue(String attributeName) throws BMIModelException {
+        if (attributeName.equals("author")) {
+            return "Rolf Hut";
+        } else {
+            throw new BMIModelException("unknown attribute " + attributeName);
+        }
+    }
+
+    @Override
+    public String setAttributeValue(String attributeName, String attributeValue) throws BMIModelException {
+        throw new BMIModelException("no settable attributes in this model");
     }
 }

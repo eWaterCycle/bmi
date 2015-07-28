@@ -78,17 +78,6 @@ class Bmi(object):
         raise NotImplementedError
 
     @abstractmethod
-    def save_state(self, destination_directory):
-        """
-        Ask the model to write its complete internal current state to one or more state files in the given directory.
-        Afterwards the given directory should only contain the state files and nothing else.
-
-        Input parameters:
-        File destination_directory: the directory in which the state files should be written.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
     def finalize(self):
         """
         Finalize the model.
@@ -393,3 +382,57 @@ class Bmi(object):
         ???
         """
         raise NotImplementedError
+    
+    
+class EBmi(Bmi):
+    
+    @abstractmethod
+    def initialize_config(self, config_file):
+        raise NotImplementedError
+    
+    @abstractmethod
+    def initialize_state(self):
+        raise NotImplementedError
+    
+    @abstractmethod
+    def set_start_time(self, start_time):
+        raise NotImplementedError
+    
+    @abstractmethod
+    def set_end_time(self, end_time):
+        raise NotImplementedError
+    
+    @abstractmethod
+    def get_attribute_names(self):
+        raise NotImplementedError
+    
+    @abstractmethod
+    def get_attribute_value(self, attribute_name):
+        raise NotImplementedError
+    
+    @abstractmethod
+    def set_attribute_value(self, attribute_name, attribute_value):
+        raise NotImplementedError
+    
+    @abstractmethod
+    def save_state(self, destination_directory):
+        """
+        Ask the model to write its complete internal current state to one or more state files in the given directory.
+        Afterwards the given directory should only contain the state files and nothing else.
+
+        Input parameters:
+        File destination_directory: the directory in which the state files should be written.
+        """
+        raise NotImplementedError
+
+
+    
+    
+
+
+
+
+    
+
+        
+    

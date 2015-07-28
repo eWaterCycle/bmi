@@ -16,7 +16,7 @@
 package bmi;
 
 /**
- * Simple BMI Java binding. Currently only supports double values, and treats 0, 1, 2, and 3 dimensional values as simple 1
+ * Simple BMI Java binding. Currently only supports double and float values, and treats 0, 1, 2, and 3 dimensional values as simple 1
  * dimensional arrays.
  *
  * @author Niels Drost
@@ -95,8 +95,8 @@ public interface BMI {
 
     public double[] getGridZ(String longVarName) throws BMIModelException;
 
-    public double[] getGridConnectivity(String longVarName) throws BMIModelException;
+    public int[] getGridConnectivity(String longVarName) throws BMIModelException;
 
-    public double[] getGridOffset(String longVarName) throws BMIModelException;
+    public int[] getGridOffset(String longVarName) throws BMIModelException;
 
 }
