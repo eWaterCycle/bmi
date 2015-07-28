@@ -776,7 +776,7 @@ public class IncrementModelTest {
 
     @Test
     public void testGetAttributeValue() throws Exception {
-        assertEquals("Rolf Hut", model.getAttributeValue("author"), "wrong value for attribute");
+        assertEquals("wrong value for attribute", "Rolf Hut", model.getAttributeValue("author"));
     }
     
     @Test(expected = BMIModelException.class)
