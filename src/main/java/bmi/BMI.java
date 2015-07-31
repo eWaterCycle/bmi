@@ -32,8 +32,6 @@ public interface BMI {
 
     public void updateFrac(double timeFrac) throws BMIModelException;
 
-    public void saveState(String destinationFolder) throws BMIModelException;
-
     /**
      * As "finalize" is reserved in Java, we use finalizeModel instead.
      */
