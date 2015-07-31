@@ -1,5 +1,6 @@
 import numpy as np
 import sys
+import logging
 
 from bmi import EBmi, BmiGridType
 #from scipy import ndimage
@@ -43,8 +44,9 @@ class IncrementModel (EBmi):
     def initialize (self, config_file):
         self.initialize_config(config_file)
         self.initialize_state()
-        
-        print "initialized model"
+       
+	#this is a warning to allow testing of the logging system 
+        logging.warn('initialized model')
 
     def update (self):
         if self._t >= self._endTime:
@@ -58,6 +60,9 @@ class IncrementModel (EBmi):
         while self._t < t:
             self.update ()
 
+    def update_frac(self, time_frac):
+        raise Exception("unsupported operation")
+    
     def finalize (self):
         self._dt = 0
         self._t = 0
@@ -111,8 +116,10 @@ class IncrementModel (EBmi):
 
     def get_grid_shape (self, long_var_name):
         return self.get_value (long_var_name).shape
+
     def get_grid_spacing (self, long_var_name):
         return self._spacing
+
     def get_grid_origin (self, long_var_name):
         return self._origin
 
@@ -129,9 +136,38 @@ class IncrementModel (EBmi):
     def get_current_time (self):
         return self._t
 
+    def get_var_nbytes(self, long_var_name):
+        return self._state.nbytes
+    
+    def get_var_size(self, long_var_name):
+        return self._state.size
+
+    def get_time_step(self):
+        return 1.
+
+    def get_time_units(self):
+        return "seconds"
+
+    def get_grid_x(self, long_var_name):
+        raise Exception("unsupported operation")
+
+    def get_grid_y(self, long_var_name):
+        raise Exception("unsupported operation")
+
+    def get_grid_z(self, long_var_name):
+        raise Exception("unsupported operation")
+
+    def get_grid_connectivity(self, long_var_name):
+        raise Exception("unsupported operation")
+
+    def get_grid_offset(self, long_var_name):
+        raise Exception("unsupported operation")
+
     
     # extended BMI functions
 
+    def save_state(self, destination_directory):
+        raise Exception("unsupported operation")
     
     def set_start_time(self, start_time):
         self._startTime = start_time
@@ -143,7 +179,7 @@ class IncrementModel (EBmi):
         return ['author']
     
     def get_attribute_value(self, attribute_name):
-        if attribute_name is 'author':
+        if attribute_name == 'author':
             return 'Rolf Hut'
         
         raise Exception('unknown attribute: ' + attribute_name)
