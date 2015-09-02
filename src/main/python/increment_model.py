@@ -35,7 +35,7 @@ class IncrementModel (EBmi):
         self._spacing = (1., 1.)
         self._origin = (0., 0.)
     
-    def initialize_state(self):
+    def initialize_state(self, source_directory):
         self._state = np.zeros (self._shape) + self._startTime
         
         self._value['var1'] = "_state"

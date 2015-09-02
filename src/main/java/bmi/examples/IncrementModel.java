@@ -52,7 +52,7 @@ public class IncrementModel implements EBMI {
     }
 
     @Override
-    public void initializeState() throws BMIModelException {
+    public void initializeState(String sourceDirectory) throws BMIModelException {
         //initialize state
         state = new DoubleRaster(shape[0], shape[1]);
         state.setScalar(startTime);
@@ -61,7 +61,7 @@ public class IncrementModel implements EBMI {
     @Override
     public void initialize(String file) throws BMIModelException {
         initializeConfig(file);
-        initializeState();
+        initializeState(null);
     }
 
     @Override

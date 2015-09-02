@@ -33,7 +33,7 @@ public interface EBMI extends BMI {
      */
     void initializeConfig(String configFile) throws BMIModelException;
     
-    void initializeState() throws BMIModelException;
+    void initializeState(String sourceDirectory) throws BMIModelException;
 
     //usually only possible before initializeState
     void setStartTime(double startTime) throws BMIModelException;

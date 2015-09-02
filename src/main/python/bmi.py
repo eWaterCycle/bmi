@@ -391,7 +391,7 @@ class EBmi(Bmi):
         raise NotImplementedError
     
     @abstractmethod
-    def initialize_state(self):
+    def initialize_state(self, source_folder):
         raise NotImplementedError
     
     @abstractmethod
