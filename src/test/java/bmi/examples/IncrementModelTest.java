@@ -87,7 +87,7 @@ public class IncrementModelTest {
 
         model.initializeConfig("");
         
-        model.initializeState(null);
+        model.initializeModel();
     }
 
 
@@ -741,7 +741,7 @@ public class IncrementModelTest {
         EBMI model = new IncrementModel();
 
         model.initializeConfig("");
-        model.initializeState(null);
+        model.initializeModel();
         
         model.setStartTime(5.0);
     }
@@ -764,7 +764,7 @@ public class IncrementModelTest {
         EBMI model = new IncrementModel();
 
         model.initializeConfig("");
-        model.initializeState(null);
+        model.initializeModel();
         
         model.setEndTime(5.0);
     }

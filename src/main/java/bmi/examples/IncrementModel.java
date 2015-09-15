@@ -52,7 +52,7 @@ public class IncrementModel implements EBMI {
     }
 
     @Override
-    public void initializeState(String sourceDirectory) throws BMIModelException {
+    public void initializeModel() throws BMIModelException {
         //initialize state
         state = new DoubleRaster(shape[0], shape[1]);
         state.setScalar(startTime);
@@ -61,7 +61,7 @@ public class IncrementModel implements EBMI {
     @Override
     public void initialize(String file) throws BMIModelException {
         initializeConfig(file);
-        initializeState(null);
+        initializeModel();
     }
 
     @Override
@@ -251,8 +251,14 @@ public class IncrementModel implements EBMI {
 
     @Override
     public void saveState(String destinationFolder) throws BMIModelException {
-        throw new BMIModelException("model does not support saving state");
+        throw new BMIModelException("model does not support saving/loading state");
     }
+    
+    @Override
+    public void loadState(String sourceFolder) throws BMIModelException {
+        throw new BMIModelException("model does not support saving/loading state");
+    }
+
 
     @Override
     public int getVarSize(String longVarName) throws BMIModelException {
@@ -338,7 +344,7 @@ public class IncrementModel implements EBMI {
     }
 
     @Override
-    public String setAttributeValue(String attributeName, String attributeValue) throws BMIModelException {
+    public void setAttributeValue(String attributeName, String attributeValue) throws BMIModelException {
         throw new BMIModelException("no settable attributes in this model");
     }
 }
