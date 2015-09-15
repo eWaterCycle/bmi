@@ -7,7 +7,8 @@ from bmi import EBmi, BmiGridType
 
 class IncrementModel (EBmi):
     _var_units = {'var1': 'unit1'}
-    _name = 'Example Python Toy Model'
+    _name = 'Increment Model'
+    _author = 'Rolf Hut'
     _input_var_names = ['var1']
     _output_var_names = ['var1']
 
@@ -24,6 +25,7 @@ class IncrementModel (EBmi):
         
         self._value = {}
 
+    #ebmi function
     def initialize_config(self, config_file):
         self._dt = 1.
         self._t = 1.
@@ -35,15 +37,15 @@ class IncrementModel (EBmi):
         self._spacing = (1., 1.)
         self._origin = (0., 0.)
     
-    def initialize_state(self, source_directory):
+    #ebmi function
+    def initialize_model(self):
         self._state = np.zeros (self._shape) + self._startTime
         
         self._value['var1'] = "_state"
 
-
     def initialize (self, config_file):
         self.initialize_config(config_file)
-        self.initialize_state()
+        self.initialize_model()
        
 	#this is a warning to allow testing of the logging system 
         logging.warn('initialized model')
@@ -169,6 +171,10 @@ class IncrementModel (EBmi):
     def save_state(self, destination_directory):
         raise Exception("unsupported operation")
     
+    def load_state(self, destination_directory):
+        raise Exception("unsupported operation")
+
+    
     def set_start_time(self, start_time):
         self._startTime = start_time
     
@@ -180,12 +186,15 @@ class IncrementModel (EBmi):
     
     def get_attribute_value(self, attribute_name):
         if attribute_name == 'author':
-            return 'Rolf Hut'
+            return self._author
         
         raise Exception('unknown attribute: ' + attribute_name)
     
     def set_attribute_value(self, attribute_name, attribute_value):
-        raise Exception('no settable attributes in this model')
+        if attribute_name == 'author':
+           self._author = attribute_value
+        else:
+            raise Exception('unknown attribute: ' + attribute_name)
 
 def main ():
     import doctest
